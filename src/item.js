@@ -6,3 +6,4 @@ class Item {
     this.descripcion = descripcion;
   }
 }
+export default Item;
