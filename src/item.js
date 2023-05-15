@@ -5,5 +5,6 @@ class Item {
     this.stock = stock;
     this.descripcion = descripcion;
   }
+ 
 }
 export default Item;

@@ -9,4 +9,7 @@ describe("Mostrar items", () => {
   it("deberia mostrar el nombre del item", () => {
     expect(new Item("Pique Macho",15,20,"Carne y chorizo con papas.").nombre).toEqual("Pique Macho");
   });
+  it("deberia mostrar la descripcion del item", () => {
+    expect(new Item("Pique Macho",15,20,"Carne y chorizo con papas.").descripcion).toEqual("Carne y chorizo con papas.");
+  });
 });
