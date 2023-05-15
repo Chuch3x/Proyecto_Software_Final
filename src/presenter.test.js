@@ -12,4 +12,7 @@ describe("Mostrar items", () => {
   it("deberia mostrar la descripcion del item", () => {
     expect(new Item("Pique Macho",15,20,"Carne y chorizo con papas.").descripcion).toEqual("Carne y chorizo con papas.");
   });
+  it("deberia mostrar el stock del item", () => {
+    expect(new Item("Pique Macho",15,20,"Carne y chorizo con papas.").stock).toEqual(20);
+  });
 });
