@@ -7,7 +7,11 @@ class Cliente{
     }
     agregarReserva(item)
     {
-        this.reservas.push(item);
+        if(item.stock>0)
+        {
+            this.reservas.push(item);
+        }
+        
     }
 
 }
