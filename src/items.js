@@ -7,4 +7,5 @@ function mostrar_items(productos_menu){
     return productos_menu;
 }
 
+
 export default mostrar_items;
