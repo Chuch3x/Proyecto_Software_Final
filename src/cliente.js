@@ -10,6 +10,7 @@ class Cliente{
         if(item.stock>0)
         {
             this.reservas.push(item);
+            item.stock--;
         }
         
     }
