@@ -30,5 +30,10 @@ describe("Mostrar items", () => {
   });
   it("Debería reducir el stock de un item en 1", () => {
     expect(item.stock).toEqual(19);
+    
+  });
+  it("Debería de eliminarse la reserva del cliente", () => {
+    cliente.eliminarReserva(item.nombre);
+    expect(cliente.reservas).toEqual([]);
   });
 });

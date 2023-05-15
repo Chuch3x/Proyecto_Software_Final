@@ -23,12 +23,16 @@ productos.forEach(producto => {
         productos_lista.appendChild(li);
         productos_lista.append(agregarButton);
           });
-
+   
+     
 var reservasCliente = cliente.reservas;
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     reservasCliente.forEach((item) => {
+        const EliminarButton = document.createElement('Button');
+        EliminarButton.textContent= "Eliminar";
+        EliminarButton.onclick = ()=>cliente.eliminarReserva(producto);
         const li = document.createElement("li");
         li.innerHTML = `${item.nombre}: ${item.descripcion} - Precio: $${item.precio} - Stock: ${item.stock}`;
         div.appendChild(li);

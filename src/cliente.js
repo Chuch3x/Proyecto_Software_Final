@@ -11,9 +11,16 @@ class Cliente{
         {
             this.reservas.push(item);
             item.stock--;
-            alert("Se agrego el item correctamente");
+            //return console.log("se agrego");
         }
         
+    }
+    eliminarReserva(nombre)
+    {
+        this.reservas = this.reservas.filter
+        (
+            (elemento) => elemento.nombre !== nombre
+        );
     }
 
 }
