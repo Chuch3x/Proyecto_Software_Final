@@ -34,7 +34,7 @@ form.addEventListener("submit", (event) => {
         EliminarButton.textContent= "Eliminar";
         EliminarButton.onclick = ()=>cliente.eliminarReserva(producto);
         const li = document.createElement("li");
-        li.innerHTML = `${item.nombre}: ${item.descripcion} - Precio: $${item.precio} - Stock: ${item.stock}`;
+        li.innerHTML = `${item.nombre}- Precio: $${item.precio} `;
         div.appendChild(li);
       });
       div.reset();
