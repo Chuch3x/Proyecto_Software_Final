@@ -33,7 +33,7 @@ describe("Mostrar items", () => {
     
   });
   it("Debería de eliminarse la reserva del cliente", () => {
-    cliente.eliminarReserva(item.nombre);
+    cliente.eliminarReserva(item);
     expect(cliente.reservas).toEqual([]);
   });
   it("Debería de aumentar el stock del item", () => {
