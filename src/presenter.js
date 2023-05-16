@@ -11,7 +11,6 @@ const stock_producto = document.querySelector('#stock_producto');
 const descripcion_producto = document.querySelector('#descripcion_producto');
 
 var productos = [new Item("Salchipapa", 10, 15, "Papas con salchicha."), new Item("Panini", 5, 15, "Masa rellena de jamon con tomate.")];
-
 var cliente = new Cliente("contrasena1", "dayan");
 
 function mostrarProductos() {
@@ -32,10 +31,15 @@ function mostrarProductos() {
     editarButton.addEventListener('click', () => {
       editarProducto(producto);
     });
+    const eliminarButton = document.createElement('button');
+    eliminarButton.textContent = "Eliminar";
+    eliminarButton.addEventListener('click', () => {
+      li.remove();
+    });
 
     li.appendChild(agregarButton);
     li.appendChild(editarButton);
-
+    li.appendChild(eliminarButton);
     productos_lista.appendChild(li);
   });
 }
