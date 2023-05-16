@@ -40,4 +40,8 @@ describe("Mostrar items", () => {
     cliente.eliminarReserva(item);
     expect(cliente.reservas).toEqual([]);
   });
+  it("Debería crear un producto", () => {
+    cliente.crearProducto('pilfrut',1,5,'Jugo de frutas');
+    expect(cliente.crearProducto('pilfrut',1,5,'Jugo de frutas')).toEqual({"descripcion": "Jugo de frutas", "nombre": "pilfrut", "precio": 1, "stock": 5});
+  });
 });

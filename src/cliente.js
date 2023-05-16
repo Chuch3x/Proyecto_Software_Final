@@ -1,3 +1,4 @@
+import Item from "./item";
 class Cliente{
     constructor( password, email)
     {
@@ -23,6 +24,11 @@ class Cliente{
     
         );
         item.stock++;
+    }
+    crearProducto(nombre,precio,stock,descripcion)
+    {
+        const producto=new Item(nombre,precio,stock,descripcion);
+        return producto;
     }
 
 }
