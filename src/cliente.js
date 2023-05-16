@@ -15,12 +15,15 @@ class Cliente{
         }
         
     }
-    eliminarReserva(nombre)
+    eliminarReserva(item)
     {
+
         this.reservas = this.reservas.filter
         (
-            (elemento) => elemento.nombre !== nombre
+            (elemento) => elemento.nombre !== item.nombre
+    
         );
+        item.stock++;
     }
 
 }
