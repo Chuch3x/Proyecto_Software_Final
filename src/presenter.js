@@ -37,7 +37,7 @@ form.addEventListener("submit", (event) => {
 
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.nombre}: ${item.descripcion} - Precio: $${item.precio} - Stock: ${item.stock}`;
+    li.innerHTML = `${item.nombre} - Precio: $${item.precio}`;
     div.appendChild(li);
 
     const eliminarButton = document.createElement('button');
