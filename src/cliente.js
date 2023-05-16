@@ -30,6 +30,7 @@ class Cliente{
         const producto=new Item(nombre,precio,stock,descripcion);
         return producto;
     }
+   
 
 }
 export default Cliente;

@@ -20,7 +20,6 @@ function mostrarProductos() {
   productos.forEach((producto) => {
     const li = document.createElement("li");
     li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-    productos_lista.appendChild(li);
 
     const agregarButton = document.createElement('button');
     agregarButton.textContent = "Agregar";
@@ -28,9 +27,39 @@ function mostrarProductos() {
       cliente.agregarReserva(producto);
     });
 
-    productos_lista.appendChild(agregarButton);
+    const editarButton = document.createElement('button');
+    editarButton.textContent = "Editar";
+    editarButton.addEventListener('click', () => {
+      editarProducto(producto);
+    });
+
+    li.appendChild(agregarButton);
+    li.appendChild(editarButton);
+
+    productos_lista.appendChild(li);
   });
 }
+  
+
+function editarProducto(producto) {
+    // Rellenar los campos del formulario con los valores del producto existente
+    nombre_producto.value = producto.nombre;
+    precio_producto.value = producto.precio;
+    stock_producto.value = producto.stock;
+    descripcion_producto.value = producto.descripcion;
+  
+    // Eliminar el producto existente de la lista de productos
+    const index = productos.indexOf(producto);
+    if (index > -1) {
+      productos.splice(index, 1);
+    }
+  
+    // Actualizar la lista de productos en el HTML
+    mostrarProductos();
+  }
+  
+
+
 mostrarProductos();
 
 crear_producto_form.addEventListener("submit", (event) => {
@@ -48,8 +77,16 @@ crear_producto_form.addEventListener("submit", (event) => {
     cliente.agregarReserva(productoCreado);
   });
 
-  productos_lista.appendChild(agregarButton);
+  const editarButton = document.createElement('button');
+  editarButton.textContent = "Editar";
+  editarButton.addEventListener('click', () => {
+    editarProducto(producto);
+  });
+ 
+ productos_lista.appendChild(agregarButton);
+ productos_lista.appendChild(editarButton);
   crear_producto_form.reset();
+
 });
 
 form.addEventListener("submit", (event) => {
