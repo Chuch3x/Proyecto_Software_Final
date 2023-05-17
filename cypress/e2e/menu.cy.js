@@ -3,7 +3,7 @@ describe("Mostrar Menu", () => {
       cy.visit("/");
       cy.get("#items_menu").should("contain", "Salchipapa");
     });
-    it("Debe existir un menu", () => {
+    it("Debería existir un menu", () => {
       cy.visit("/");
       cy.get("#items_menu").should("exist");
     });
