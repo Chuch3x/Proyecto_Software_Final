@@ -27,6 +27,7 @@ function mostrarProductos() {
     agregarButton.textContent = "Agregar";
     agregarButton.addEventListener("click", () => {
       cliente.agregarReserva(producto);
+      mostrarProductos();
     });
 
     const editarButton = document.createElement("button");
@@ -89,17 +90,18 @@ crear_producto_form.addEventListener("submit", (event) => {
   agregarButton.textContent = "Agregar";
   agregarButton.addEventListener("click", () => {
     cliente.agregarReserva(productoCreado);
+    mostrarProductos();g
   });
 
   const editarButton = document.createElement("button");
   editarButton.textContent = "Editar";
   editarButton.addEventListener("click", () => {
-    editarProducto(producto);
+    editarProducto(productoCreado);
   });
   const eliminarButton = document.createElement("button");
   eliminarButton.textContent = "Eliminar";
   eliminarButton.addEventListener("click", () => {
-    const index = productos.indexOf(producto);
+    const index = productos.indexOf(productoCreado);
     if (index > -1) {
       productos.splice(index, 1);
     }
@@ -107,24 +109,21 @@ crear_producto_form.addEventListener("submit", (event) => {
     console.log(productos);
   });
 
-  productos_lista.appendChild(agregarButton);
-  productos_lista.appendChild(editarButton);
-  productos_lista.appendChild(eliminarButton);
+  li.appendChild(agregarButton);
+  li.appendChild(editarButton);
+  li.appendChild(eliminarButton);
+  productos_lista.appendChild(li);
   crear_producto_form.reset();
 });
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const reservasCliente = cliente.reservas;
-
-  // Vaciar el contenido del div antes de agregar los elementos actualizados
   div.innerHTML = "";
-
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio}`;
     div.appendChild(li);
-
     const eliminarButton = document.createElement("button");
     eliminarButton.textContent = "Eliminar";
     eliminarButton.addEventListener("click", () => {
@@ -132,7 +131,6 @@ form.addEventListener("submit", (event) => {
       div.removeChild(li);
       div.removeChild(eliminarButton);
     });
-
     div.appendChild(eliminarButton);
   });
 });
