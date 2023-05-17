@@ -41,9 +41,10 @@ function mostrarProductos() {
       const index = productos.indexOf(producto);
       if (index > -1) {
         productos.splice(index, 1);
+        li.remove();
+        alert("Producto eliminado");
       }
       console.log(productos);
-      li.remove();
     });
 
     li.appendChild(agregarButton);
@@ -90,7 +91,7 @@ crear_producto_form.addEventListener("submit", (event) => {
   agregarButton.textContent = "Agregar";
   agregarButton.addEventListener("click", () => {
     cliente.agregarReserva(productoCreado);
-    mostrarProductos();g
+    mostrarProductos();
   });
 
   const editarButton = document.createElement("button");
@@ -104,8 +105,9 @@ crear_producto_form.addEventListener("submit", (event) => {
     const index = productos.indexOf(productoCreado);
     if (index > -1) {
       productos.splice(index, 1);
+      li.remove();
+      alert("Producto eliminado");
     }
-    li.remove();
     console.log(productos);
   });
 
