@@ -35,13 +35,13 @@ function mostrarProductos() {
     const eliminarButton = document.createElement("button");
     eliminarButton.textContent = "Eliminar";
     eliminarButton.addEventListener("click", () => {
-      const index = productos.indexOf(producto);
+      const index = PRODUCTOS.indexOf(producto);
       if (index > -1) {
-        productos.splice(index, 1);
+        PRODUCTOS.splice(index, 1);
         li.remove();
         alert("Producto eliminado");
       }
-      console.log(productos);
+      console.log(PRODUCTOS);
     });
 
     li.appendChild(agregarButton);
@@ -59,9 +59,9 @@ function editarProducto(producto) {
   descripcion_producto.value = producto.descripcion;
 
   // Eliminar el producto existente de la lista de productos
-  const index = productos.indexOf(producto);
+  const index = PRODUCTOS.indexOf(producto);
   if (index > -1) {
-    productos.splice(index, 1);
+    PRODUCTOS.splice(index, 1);
   }
 
   // Actualizar la lista de productos en el HTML
@@ -78,7 +78,7 @@ crear_producto_form.addEventListener("submit", (event) => {
     parseInt(stock_producto.value),
     descripcion_producto.value
   );
-  productos.push(productoCreado);
+  PRODUCTOS.push(productoCreado);
 
   const li = document.createElement("li");
   li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
