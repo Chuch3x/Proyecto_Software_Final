@@ -12,7 +12,6 @@ class Cliente{
         {
             this.reservas.push(item);
             item.stock--;
-            //return console.log("se agrego");
         }
         
     }
