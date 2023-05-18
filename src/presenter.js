@@ -124,6 +124,7 @@ form.addEventListener("submit", (event) => {
       cliente.eliminarReserva(item);
       div.removeChild(li);
       div.removeChild(eliminarButton);
+      mostrarProductos();
     });
 
     div.appendChild(eliminarButton);
