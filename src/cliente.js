@@ -1,35 +1,28 @@
 import Item from "./item";
-class Cliente{
-    constructor( password, email)
-    {
-        this.password=password;
-        this.email=email;
-        this.reservas=[];
+class Cliente {
+  constructor(password, email) {
+    this.password = password;
+    this.email = email;
+    this.reservas = [];
+  }
+  agregarReserva(item) {
+    if (item.stock > 0) {
+      this.reservas.push(item);
+      item.stock--;
     }
-    agregarReserva(item)
-    {
-        if(item.stock>0)
-        {
-            this.reservas.push(item);
-            item.stock--;
-        }
-        
-    }
-    eliminarReserva(item)
-    {
-        this.reservas = this.reservas.filter
-        (
-            (elemento) => elemento.nombre !== item.nombre
-    
-        );
-        item.stock++;
-    }
-    crearProducto(nombre,precio,stock,descripcion)
-    {
-        const producto=new Item(nombre,precio,stock,descripcion);
-        return producto;
-    }
-   
-
+  }
+  eliminarReserva(item) {
+    this.reservas = this.reservas.filter(
+      (elemento) => elemento.nombre !== item.nombre
+    );
+    item.stock++;
+  }
+  crearProducto(nombre, precio, stock, descripcion) {
+    const producto = new Item(nombre, precio, stock, descripcion);
+    return producto;
+  }
+  esAdmin() {
+    return this.nombre == "admin" && this.password == "password";
+  }
 }
 export default Cliente;
