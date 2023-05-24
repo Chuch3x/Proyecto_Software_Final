@@ -10,4 +10,8 @@ formulario.addEventListener("submit", (event) => {
     window.location.href = "index.html";
     alert("Bienvenido Administrador");
   }
+  if(!admin.validarDatos()){
+    alert("Datos Invalidos");
+    window.location.reload();
+  }
 });
