@@ -24,5 +24,8 @@ class Cliente {
   esAdmin() {
     return this.email == "admin" && this.password == "password";
   }
+  validarDatos(){
+    return this.email != "" && this.password != "";
+  }
 }
 export default Cliente;
