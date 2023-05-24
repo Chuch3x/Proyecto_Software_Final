@@ -83,6 +83,7 @@ crear_producto_form.addEventListener("submit", (event) => {
   const li = document.createElement("li");
   li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
   productos_lista.appendChild(li);
+  
 
   const agregarButton = createButton("Agregar", () => {
     cliente.agregarReserva(productoCreado);
