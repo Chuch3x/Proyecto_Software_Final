@@ -22,7 +22,7 @@ class Cliente {
     return producto;
   }
   esAdmin() {
-    return this.nombre == "admin" && this.password == "password";
+    return this.email == "admin" && this.password == "password";
   }
 }
 export default Cliente;
