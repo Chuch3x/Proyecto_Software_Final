@@ -17,7 +17,7 @@ const cliente = new Cliente("contrasena1", "dayan");
 function mostrarSnacks() {
   productos_lista.innerHTML = "";
   PRODUCTOS.forEach((producto) => {
-    
+    console.log(producto.nombre + ": " + producto.categoria);
     if(producto.categoria=='snacks')
     {
       const li = document.createElement("li");
@@ -87,7 +87,7 @@ function mostrarSegundos() {
   });
 }
 function mostrarProductos() {
-  mostrarSegundos();
+  //mostrarSegundos();
   mostrarSnacks();
 }
 

@@ -17,8 +17,8 @@ class Cliente {
     );
     item.stock++;
   }
-  crearProducto(nombre, precio, stock, descripcion) {
-    const producto = new Item(nombre, precio, stock, descripcion);
+  crearProducto(nombre, precio, stock, descripcion, categoria) {
+    const producto = new Item(nombre, precio, stock, descripcion, categoria);
     return producto;
   }
   esAdmin() {
