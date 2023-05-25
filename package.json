@@ -4,7 +4,7 @@
   "description": "",
   "default": "index.html",
   "scripts": {
-    "start": "parcel login.html",
+    "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest --watch",
     "test-once": "jest --verbose --coverage",

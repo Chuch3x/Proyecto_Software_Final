@@ -50,7 +50,6 @@ function mostrarSnacks() {
   });
 }
 
-
 function mostrarSegundos() {
   productos_lista.innerHTML = "";
   PRODUCTOS.forEach((producto) => {
@@ -86,8 +85,9 @@ function mostrarSegundos() {
     
   });
 }
+
 function mostrarProductos() {
-  //mostrarSegundos();
+  mostrarSegundos();
   mostrarSnacks();
 }
 
