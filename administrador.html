@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <a id="login_admin" href="index.html"> LOG OUT </a>
+    <h2>MENU</h2>
+    <div id="items_menu"></div>
+
+    <h2>CREAR PRODUCTO</h2>
+    <form type="submit" id="crear_producto_form">
+      <input type="text" id="nombre_producto" placeholder="nombre">
+      <input type="number" id="precio_producto" placeholder="precio">
+      <input type="number" id="stock_producto" placeholder="stock">
+      <input type="text" id="descripcion_producto" placeholder="descripcion">
+      <input type="submit" value="Agregar producto">
+    </form>
+
+    <h2>RESERVAS</h2>
+    <form type="submit" id="menu_form">
+      <div id="lista_reservas"></div>
+      <input type="submit" value="Mostrar reservas">
+      
+    </form>
+    <script type="module" src="./src/presenter_administrador.js"></script>
+  </body>
+</html>

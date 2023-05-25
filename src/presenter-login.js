@@ -7,7 +7,7 @@ formulario.addEventListener("submit", (event) => {
   event.preventDefault();
   var admin = new Cliente(contrasenia.value, usuario.value);
   if (admin.esAdmin()) {
-    window.location.href = "index.html";
+    window.location.href = "administrador.html";
     alert("Bienvenido Administrador");
   }
   if(!admin.validarDatos()){
