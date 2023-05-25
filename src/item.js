@@ -4,7 +4,10 @@ class Item {
     this.precio = precio;
     this.stock = stock;
     this.descripcion = descripcion;
+    this.categoria = "";
   }
- 
+  setCategoria(categoria){
+    this.categoria=categoria;
+  }
 }
 export default Item;
