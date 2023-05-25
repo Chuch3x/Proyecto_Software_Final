@@ -44,4 +44,8 @@ describe("Mostrar items", () => {
     cliente.crearProducto('pilfrut',1,5,'Jugo de frutas');
     expect(cliente.crearProducto('pilfrut',1,5,'Jugo de frutas')).toEqual({"categoria": "","descripcion": "Jugo de frutas", "nombre": "pilfrut", "precio": 1, "stock": 5});
   });
+  it("Debería de poner la categoria sopa", () => {
+    item.setCategoria('sopa');
+    expect(item).toEqual({"categoria": "sopa","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock":21});
+  });
 });
