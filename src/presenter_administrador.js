@@ -23,10 +23,6 @@ function mostrarSnacks() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
 
     const editarButton = createButton("Editar", () => {
       editarProducto(producto);
@@ -41,7 +37,6 @@ function mostrarSnacks() {
       }
     });
 
-    li.appendChild(agregarButton);
     li.appendChild(editarButton);
     li.appendChild(eliminarButton);
     productos_lista.appendChild(li);
@@ -59,11 +54,6 @@ function mostrarSegundos() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
-
     const editarButton = createButton("Editar", () => {
       editarProducto(producto);
     });
@@ -76,8 +66,6 @@ function mostrarSegundos() {
         alert("Producto eliminado");
       }
     });
-
-    li.appendChild(agregarButton);
     li.appendChild(editarButton);
     li.appendChild(eliminarButton);
     productos_lista.appendChild(li);
@@ -131,11 +119,6 @@ crear_producto_form.addEventListener("submit", (event) => {
   productos_lista.appendChild(li);
   
 
-  const agregarButton = createButton("Reservar", () => {
-    cliente.agregarReserva(productoCreado);
-    mostrarProductos();
-  });
-
   const editarButton = createButton("Editar", () => {
     editarProducto(productoCreado);
   });
@@ -149,7 +132,6 @@ crear_producto_form.addEventListener("submit", (event) => {
     }
   });
 
-  li.appendChild(agregarButton);
   li.appendChild(editarButton);
   li.appendChild(eliminarButton);
   productos_lista.appendChild(li);
