@@ -21,11 +21,11 @@ describe("Mostrar items", () => {
     expect(item.stock).toEqual(20);
   });
   it("deberia agregar una reserva a la lista", () => {
-    cliente.agregarReserva(item);
-    expect(cliente.reservas).toEqual([{"categoria": "snack","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock": 19}]);
+    cliente.agregarReserva(item,1);
+    expect(cliente.reservas).toEqual([{"cantidad":1,"categoria": "snack","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock": 20}]);
   });
   it("No deberia agregarse el item a la lista porque el stock es 0", () => {
-    cliente2.agregarReserva(item2);
+    cliente2.agregarReserva(item2,1);
     expect(cliente2.reservas).toEqual([]);
   });
   it("Debería reducir el stock de un item en 1", () => {
@@ -33,11 +33,11 @@ describe("Mostrar items", () => {
     
   });
   it("Debería de eliminarse la reserva del cliente", () => {
-    cliente.eliminarReserva(item);
+    cliente.eliminarReserva(item,1);
     expect(cliente.reservas).toEqual([]);
   });
   it("Debería de aumentar el stock del item", () => {
-    cliente.eliminarReserva(item);
+    cliente.eliminarReserva(item,1);
     expect(cliente.reservas).toEqual([]);
   });
   it("Debería crear un producto", () => {
@@ -45,7 +45,7 @@ describe("Mostrar items", () => {
     expect(cliente.crearProducto('pilfrut',1,5,'Jugo de frutas', "snack")).toEqual({"categoria": "snack","descripcion": "Jugo de frutas", "nombre": "pilfrut", "precio": 1, "stock": 5});
   });
   it("Debería de poner la categoria sopa", () => {
-    item.categoria = "sopa";
+    item.categoria="sopa";
     expect(item).toEqual({"categoria": "sopa","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock":21});
   });
 });
