@@ -58,14 +58,23 @@ function mostrarSegundos() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "number";
+      inputCantidad.min = "0";
+      inputCantidad.value = "1";
+
       const agregarButton = createButton("Reservar", () => {
-        cliente.agregarReserva(producto);
-        mostrarProductos();
+        const cantidad = parseInt(inputCantidad.value);
+        if (cantidad > 0) {
+          cliente.agregarReserva(producto, cantidad);
+          mostrarProductos();
+        }
       });
 
       const container = document.createElement("div");
-      
       container.appendChild(li);
+      container.appendChild(inputCantidad);
+      container.appendChild(agregarButton);
 
       segundosContainer.appendChild(container);
     }
@@ -73,6 +82,7 @@ function mostrarSegundos() {
 
   productos_lista.appendChild(segundosContainer);
 }
+
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
