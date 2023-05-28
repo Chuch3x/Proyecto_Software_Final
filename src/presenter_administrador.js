@@ -13,68 +13,62 @@ const descripcion_producto = document.querySelector("#descripcion_producto");
 
 const cliente = new Cliente("contrasena1", "dayan");
 
-
 function mostrarSnacks() {
   productos_lista.innerHTML = "";
   PRODUCTOS.forEach((producto) => {
     console.log(producto.nombre + ": " + producto.categoria);
-    if(producto.categoria=='snacks')
-    {
+    if (producto.categoria == "snacks") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
+      const editarButton = createButton("Editar", () => {
+        editarProducto(producto);
+      });
 
-    const editarButton = createButton("Editar", () => {
-      editarProducto(producto);
-    });
+      const eliminarButton = createButton("Eliminar", () => {
+        const index = PRODUCTOS.indexOf(producto);
+        if (index > -1) {
+          PRODUCTOS.splice(index, 1);
+          li.remove();
+          alert("Producto eliminado");
+        }
+      });
 
-    const eliminarButton = createButton("Eliminar", () => {
-      const index = PRODUCTOS.indexOf(producto);
-      if (index > -1) {
-        PRODUCTOS.splice(index, 1);
-        li.remove();
-        alert("Producto eliminado");
-      }
-    });
-
-    li.appendChild(editarButton);
-    li.appendChild(eliminarButton);
-    productos_lista.appendChild(li);
+      li.appendChild(editarButton);
+      li.appendChild(eliminarButton);
+      productos_lista.appendChild(li);
     }
-    
   });
 }
 
 function mostrarSegundos() {
   productos_lista.innerHTML = "";
   PRODUCTOS.forEach((producto) => {
-    
-    if(producto.categoria=='segundo')
-    {
+    if (producto.categoria == "segundo") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-    const editarButton = createButton("Editar", () => {
-      editarProducto(producto);
-    });
+      const editarButton = createButton("Editar", () => {
+        editarProducto(producto);
+      });
 
-    const eliminarButton = createButton("Eliminar", () => {
-      const index = PRODUCTOS.indexOf(producto);
-      if (index > -1) {
-        PRODUCTOS.splice(index, 1);
-        li.remove();
-        alert("Producto eliminado");
-      }
-    });
-    li.appendChild(editarButton);
-    li.appendChild(eliminarButton);
-    productos_lista.appendChild(li);
+      const eliminarButton = createButton("Eliminar", () => {
+        const index = PRODUCTOS.indexOf(producto);
+        if (index > -1) {
+          PRODUCTOS.splice(index, 1);
+          li.remove();
+          alert("Producto eliminado");
+        }
+      });
+      li.appendChild(editarButton);
+      li.appendChild(eliminarButton);
+      productos_lista.appendChild(li);
     }
-    
   });
 }
 
 function mostrarProductos() {
+  PRODUCTOS.push(JSON.parse(localStorage.getItem("reservas")));
   mostrarSegundos();
   mostrarSnacks();
 }
@@ -117,7 +111,6 @@ crear_producto_form.addEventListener("submit", (event) => {
   const li = document.createElement("li");
   li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
   productos_lista.appendChild(li);
-  
 
   const editarButton = createButton("Editar", () => {
     editarProducto(productoCreado);
@@ -141,12 +134,11 @@ crear_producto_form.addEventListener("submit", (event) => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const reservasCliente = cliente.reservas;
+  const reservasCliente = JSON.parse(localStorage.getItem("reservas"));
   div.innerHTML = "";
-
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.nombre} - Precio: $${item.precio}`;
+    li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Reservas: ${item.cantidad}`;
     div.appendChild(li);
 
     const eliminarButton = createButton("Eliminar", () => {

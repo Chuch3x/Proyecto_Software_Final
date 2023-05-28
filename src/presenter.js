@@ -6,7 +6,6 @@ const form = document.querySelector("#menu_form");
 const div = document.querySelector("#lista_reservas");
 const productos_lista = document.querySelector("#items_menu");
 
-
 const cliente = new Cliente("contrasena1", "dayan");
 
 function createButton(text, clickHandler) {
@@ -66,7 +65,7 @@ function mostrarSegundos() {
       const agregarButton = createButton("Reservar", () => {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
-          cliente.agregarReserva(producto, cantidad);
+          localStorage.setItem("reservas", JSON.stringify(producto));
           mostrarProductos();
         }
       });
@@ -96,19 +95,20 @@ form.addEventListener("submit", (event) => {
 
   const reservasCliente = cliente.reservas;
   div.innerHTML = "";
-
+  localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`; // Agregar la cantidad al texto mostrado
     div.appendChild(li);
-  
+
     const eliminarButton = createButton("Eliminar", () => {
-      cliente.eliminarReserva(item, item.cantidad); // Llamar al método eliminarReserva() en la instancia de cliente
+      cliente.eliminarReserva(item, item.cantidad);
+      //console.log(PRODUCTOS); // Llamar al método eliminarReserva() en la instancia de cliente
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
     });
-
+    mostrarProductos();
     div.appendChild(eliminarButton);
   });
 });

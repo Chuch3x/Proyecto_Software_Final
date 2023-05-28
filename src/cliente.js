@@ -20,7 +20,7 @@ class Cliente {
     this.reservas = this.reservas.filter(
       (elemento) => elemento.nombre !== item.nombre
     );
-    item.stock += cantidad;
+    item.stock = item.stock+cantidad;
   }
   
   crearProducto(nombre, precio, stock, descripcion, categoria) {
