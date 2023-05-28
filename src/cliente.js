@@ -17,6 +17,7 @@ class Cliente {
   }
   
   eliminarReserva(item, cantidad) {
+
     this.reservas = this.reservas.filter(
       (elemento) => elemento.nombre !== item.nombre
     );
