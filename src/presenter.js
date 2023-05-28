@@ -16,52 +16,39 @@ function createButton(text, clickHandler) {
 }
 
 function mostrarSnacks() {
-  productos_lista.innerHTML = "";
+  const snacksContainer = document.createElement("div");
+  snacksContainer.innerHTML = "<b>SNACKS</b>";
   PRODUCTOS.forEach((producto) => {
-    console.log(producto.nombre + ": " + producto.categoria);
-    if(producto.categoria=='snacks')
-    {
+    if (producto.categoria == "snacks") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
-    
-    li.appendChild(agregarButton);
-    productos_lista.appendChild(li);
+      snacksContainer.appendChild(li);
     }
-    
   });
+
+  productos_lista.innerHTML = "";
+  productos_lista.appendChild(snacksContainer);
 }
 
 function mostrarSegundos() {
-  productos_lista.innerHTML = "";
+  const segundosContainer = document.createElement("div");
+  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
   PRODUCTOS.forEach((producto) => {
-    
-    if(producto.categoria=='segundo')
-    {
+    if (producto.categoria == "segundo") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
-
-    li.appendChild(agregarButton);
-    productos_lista.appendChild(li);
+      segundosContainer.appendChild(li);
     }
-    
   });
+
+  productos_lista.appendChild(segundosContainer);
 }
 
 function mostrarProductos() {
-  mostrarSegundos();
+  productos_lista.innerHTML = "";
   mostrarSnacks();
+  mostrarSegundos();
 }
-
 
 
 mostrarProductos();
