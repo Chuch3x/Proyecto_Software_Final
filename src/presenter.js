@@ -83,14 +83,11 @@ function mostrarSegundos() {
   productos_lista.appendChild(segundosContainer);
 }
 
-
 function mostrarProductos() {
   productos_lista.innerHTML = "";
   mostrarSnacks();
   mostrarSegundos();
 }
-
-
 
 mostrarProductos();
 
@@ -106,12 +103,12 @@ form.addEventListener("submit", (event) => {
     div.appendChild(li);
   
     const eliminarButton = createButton("Eliminar", () => {
-      cliente.eliminarReserva(item);
+      cliente.eliminarReserva(item, item.cantidad); // Llamar al método eliminarReserva() en la instancia de cliente
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
     });
-  
+
     div.appendChild(eliminarButton);
   });
 });

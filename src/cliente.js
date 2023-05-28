@@ -16,12 +16,13 @@ class Cliente {
     }
   }
   
-  eliminarReserva(item) {
+  eliminarReserva(item, cantidad) {
     this.reservas = this.reservas.filter(
       (elemento) => elemento.nombre !== item.nombre
     );
-    item.stock++;
+    item.stock += cantidad;
   }
+  
   crearProducto(nombre, precio, stock, descripcion, categoria) {
     const producto = new Item(nombre, precio, stock, descripcion, categoria);
     return producto;
