@@ -8,6 +8,7 @@ const productos_lista = document.querySelector("#items_menu");
 
 
 const cliente = new Cliente("contrasena1", "dayan");
+
 function createButton(text, clickHandler) {
   const button = document.createElement("button");
   button.textContent = text;
@@ -22,6 +23,13 @@ function mostrarSnacks() {
     if (producto.categoria == "snacks") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
+
+      const agregarButton = createButton("Reservar", () => {
+        cliente.agregarReserva(producto);
+        mostrarProductos();
+      });
+
+      li.appendChild(agregarButton);
       snacksContainer.appendChild(li);
     }
   });
@@ -37,7 +45,17 @@ function mostrarSegundos() {
     if (producto.categoria == "segundo") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-      segundosContainer.appendChild(li);
+
+      const agregarButton = createButton("Reservar", () => {
+        cliente.agregarReserva(producto);
+        mostrarProductos();
+      });
+
+      const container = document.createElement("div");
+      li.appendChild(agregarButton);
+      container.appendChild(li);
+
+      segundosContainer.appendChild(container);
     }
   });
 
@@ -49,6 +67,7 @@ function mostrarProductos() {
   mostrarSnacks();
   mostrarSegundos();
 }
+
 
 
 mostrarProductos();
