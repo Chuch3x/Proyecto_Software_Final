@@ -24,13 +24,25 @@ function mostrarSnacks() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "number";
+      inputCantidad.min = "0";
+      inputCantidad.value = "1";
+
       const agregarButton = createButton("Reservar", () => {
-        cliente.agregarReserva(producto);
-        mostrarProductos();
+        const cantidad = parseInt(inputCantidad.value);
+        if (cantidad > 0) {
+          cliente.agregarReserva(producto, cantidad);
+          mostrarProductos();
+        }
       });
 
-      li.appendChild(agregarButton);
-      snacksContainer.appendChild(li);
+      const container = document.createElement("div");
+      container.appendChild(li);
+      container.appendChild(inputCantidad);
+      container.appendChild(agregarButton);
+
+      snacksContainer.appendChild(container);
     }
   });
 
@@ -52,7 +64,7 @@ function mostrarSegundos() {
       });
 
       const container = document.createElement("div");
-      li.appendChild(agregarButton);
+      
       container.appendChild(li);
 
       segundosContainer.appendChild(container);
@@ -80,16 +92,16 @@ form.addEventListener("submit", (event) => {
 
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.nombre} - Precio: $${item.precio}`;
+    li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`; // Agregar la cantidad al texto mostrado
     div.appendChild(li);
-
+  
     const eliminarButton = createButton("Eliminar", () => {
       cliente.eliminarReserva(item);
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
     });
-
+  
     div.appendChild(eliminarButton);
   });
 });

@@ -5,12 +5,17 @@ class Cliente {
     this.email = email;
     this.reservas = [];
   }
-  agregarReserva(item) {
-    if (item.stock > 0) {
-      this.reservas.push(item);
-      item.stock--;
+  agregarReserva(item, cantidad) {
+    if (item.stock > 0 && cantidad > 0) {
+      const itemReserva = {
+        ...item,
+        cantidad: cantidad
+      };
+      this.reservas.push(itemReserva);
+      item.stock -= cantidad;
     }
   }
+  
   eliminarReserva(item) {
     this.reservas = this.reservas.filter(
       (elemento) => elemento.nombre !== item.nombre
