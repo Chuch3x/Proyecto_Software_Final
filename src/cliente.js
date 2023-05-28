@@ -7,12 +7,12 @@ class Cliente {
   }
   agregarReserva(item, cantidad) {
     if (item.stock > 0 && cantidad > 0) {
+      item.stock -= cantidad;
       const itemReserva = {
         ...item,
         cantidad: cantidad
       };
       this.reservas.push(itemReserva);
-      item.stock -= cantidad;
     }
   }
   

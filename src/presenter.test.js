@@ -22,7 +22,7 @@ describe("Mostrar items", () => {
   });
   it("deberia agregar una reserva a la lista", () => {
     cliente.agregarReserva(item,1);
-    expect(cliente.reservas).toEqual([{"cantidad":1,"categoria": "snack","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock": 20}]);
+    expect(cliente.reservas).toEqual([{"cantidad":1,"categoria": "snack","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock": 19}]);
   });
   it("No deberia agregarse el item a la lista porque el stock es 0", () => {
     cliente2.agregarReserva(item2,1);
