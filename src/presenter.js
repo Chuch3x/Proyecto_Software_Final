@@ -8,6 +8,7 @@ const productos_lista = document.querySelector("#items_menu");
 
 
 const cliente = new Cliente("contrasena1", "dayan");
+
 function createButton(text, clickHandler) {
   const button = document.createElement("button");
   button.textContent = text;
@@ -16,53 +17,77 @@ function createButton(text, clickHandler) {
 }
 
 function mostrarSnacks() {
-  productos_lista.innerHTML = "";
+  const snacksContainer = document.createElement("div");
+  snacksContainer.innerHTML = "<b>SNACKS</b>";
   PRODUCTOS.forEach((producto) => {
-    console.log(producto.nombre + ": " + producto.categoria);
-    if(producto.categoria=='snacks')
-    {
+    if (producto.categoria == "snacks") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
-    
-    li.appendChild(agregarButton);
-    productos_lista.appendChild(li);
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "number";
+      inputCantidad.min = "0";
+      inputCantidad.value = "1";
+
+      const agregarButton = createButton("Reservar", () => {
+        const cantidad = parseInt(inputCantidad.value);
+        if (cantidad > 0) {
+          cliente.agregarReserva(producto, cantidad);
+          mostrarProductos();
+        }
+      });
+
+      const container = document.createElement("div");
+      container.appendChild(li);
+      container.appendChild(inputCantidad);
+      container.appendChild(agregarButton);
+
+      snacksContainer.appendChild(container);
     }
-    
   });
+
+  productos_lista.innerHTML = "";
+  productos_lista.appendChild(snacksContainer);
 }
 
 function mostrarSegundos() {
-  productos_lista.innerHTML = "";
+  const segundosContainer = document.createElement("div");
+  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
   PRODUCTOS.forEach((producto) => {
-    
-    if(producto.categoria=='segundo')
-    {
+    if (producto.categoria == "segundo") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-    const agregarButton = createButton("Reservar", () => {
-      cliente.agregarReserva(producto);
-      mostrarProductos();
-    });
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "number";
+      inputCantidad.min = "0";
+      inputCantidad.value = "1";
 
-    li.appendChild(agregarButton);
-    productos_lista.appendChild(li);
+      const agregarButton = createButton("Reservar", () => {
+        const cantidad = parseInt(inputCantidad.value);
+        if (cantidad > 0) {
+          cliente.agregarReserva(producto, cantidad);
+          mostrarProductos();
+        }
+      });
+
+      const container = document.createElement("div");
+      container.appendChild(li);
+      container.appendChild(inputCantidad);
+      container.appendChild(agregarButton);
+
+      segundosContainer.appendChild(container);
     }
-    
   });
+
+  productos_lista.appendChild(segundosContainer);
 }
 
 function mostrarProductos() {
-  mostrarSegundos();
+  productos_lista.innerHTML = "";
   mostrarSnacks();
+  mostrarSegundos();
 }
-
-
 
 mostrarProductos();
 
@@ -74,11 +99,11 @@ form.addEventListener("submit", (event) => {
 
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.nombre} - Precio: $${item.precio}`;
+    li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`; // Agregar la cantidad al texto mostrado
     div.appendChild(li);
-
+  
     const eliminarButton = createButton("Eliminar", () => {
-      cliente.eliminarReserva(item);
+      cliente.eliminarReserva(item, item.cantidad); // Llamar al método eliminarReserva() en la instancia de cliente
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();

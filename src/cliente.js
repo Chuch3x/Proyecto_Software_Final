@@ -5,18 +5,24 @@ class Cliente {
     this.email = email;
     this.reservas = [];
   }
-  agregarReserva(item) {
-    if (item.stock > 0) {
-      this.reservas.push(item);
-      item.stock--;
+  agregarReserva(item, cantidad) {
+    if (item.stock > 0 && cantidad > 0) {
+      const itemReserva = {
+        ...item,
+        cantidad: cantidad
+      };
+      this.reservas.push(itemReserva);
+      item.stock -= cantidad;
     }
   }
-  eliminarReserva(item) {
+  
+  eliminarReserva(item, cantidad) {
     this.reservas = this.reservas.filter(
       (elemento) => elemento.nombre !== item.nombre
     );
-    item.stock++;
+    item.stock += cantidad;
   }
+  
   crearProducto(nombre, precio, stock, descripcion, categoria) {
     const producto = new Item(nombre, precio, stock, descripcion, categoria);
     return producto;
