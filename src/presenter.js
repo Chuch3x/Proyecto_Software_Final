@@ -35,6 +35,7 @@ function mostrarSnacks() {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
           cliente.agregarReserva(producto, cantidad);
+          localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
           console.log(PRODUCTOS);
           mostrarProductos();
         }
@@ -74,6 +75,7 @@ function mostrarSegundos() {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
           cliente.agregarReserva(producto, cantidad);
+          localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
           mostrarProductos();
         }
       });
@@ -111,17 +113,17 @@ form.addEventListener("submit", (event) => {
 
   const reservasCliente = cliente.reservas;
   div.innerHTML = "";
-  localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
-
     const eliminarButton = document.createElement("input");
     eliminarButton.type = "button";
     eliminarButton.value = "Eliminar";
     eliminarButton.addEventListener("click", () => {
       cliente.eliminarReserva(item, item.cantidad);
+      localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       actualizarItem(PRODUCTOS, item);
+      
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
