@@ -22,13 +22,19 @@ function actualizarItem(lista, producto) {
     }
   }
 }
-if (localStorage.getItem("reservas").length > 0) {
-  const array = JSON.parse(localStorage.getItem("reservas"));
-  array.forEach((elemento) => {
-    // Aquí puedes realizar las operaciones deseadas con cada elemento del array
-    actualizarItem(PRODUCTOS, elemento);
-    console.log(elemento);
-  });
+
+try {
+  if (localStorage.getItem("reservas").length > 0) {
+    const array = JSON.parse(localStorage.getItem("reservas"));
+    array.forEach((elemento) => {
+      // Aquí puedes realizar las operaciones deseadas con cada elemento del array
+      actualizarItem(PRODUCTOS, elemento);
+      console.log(elemento);
+    });
+  }
+} catch (error) {
+  // Manejar el error
+  console.error("Ocurrió un error:", error);
 }
 
 function mostrarSnacks() {
