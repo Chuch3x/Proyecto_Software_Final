@@ -67,7 +67,10 @@ function mostrarSegundos() {
       inputCantidad.min = "0";
       inputCantidad.value = "1";
 
-      const agregarButton = createButton("Reservar", () => {
+      const reservarButton = document.createElement("input");
+      reservarButton.type = "button";
+      reservarButton.value = "Reservar";
+      reservarButton.addEventListener("click", () => {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
           cliente.agregarReserva(producto, cantidad);
@@ -76,10 +79,10 @@ function mostrarSegundos() {
       });
 
       const container = document.createElement("div");
-      container.setAttribute("class","item_menu");
+      container.setAttribute("class", "item_menu");
       container.appendChild(li);
       container.appendChild(inputCantidad);
-      container.appendChild(agregarButton);
+      container.appendChild(reservarButton);
       segundosContainer.appendChild(container);
     }
   });
