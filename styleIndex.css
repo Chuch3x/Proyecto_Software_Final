@@ -101,11 +101,13 @@ a {
     margin-left: 10px;
     margin-right: 10px;
   }
+
   #lista_reservas {
     padding: 40px;
     border-radius: 5px;
     background-color: #8bc5ff;
     border: 4px solid #facd5d;
+    margin-bottom: 10px;
   }
   
   #lista_reservas div {
@@ -116,5 +118,9 @@ a {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+  }
+
+  .mostrar_reservas{
+    margin: 10px;
   }
   
