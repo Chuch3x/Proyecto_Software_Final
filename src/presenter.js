@@ -105,6 +105,7 @@ function actualizarItem(lista, producto) {
     }
   }
 }
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -113,16 +114,20 @@ form.addEventListener("submit", (event) => {
   localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
-    li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`; // Agregar la cantidad al texto mostrado
-    div.appendChild(li);
+    li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
 
-    const eliminarButton = createButton("Eliminar", () => {
+    const eliminarButton = document.createElement("input");
+    eliminarButton.type = "button";
+    eliminarButton.value = "Eliminar";
+    eliminarButton.addEventListener("click", () => {
       cliente.eliminarReserva(item, item.cantidad);
-      actualizarItem(PRODUCTOS,item);
+      actualizarItem(PRODUCTOS, item);
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
     });
+
+    div.appendChild(li);
     div.appendChild(eliminarButton);
-  });
+  });
 });
