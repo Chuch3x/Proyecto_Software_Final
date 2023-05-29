@@ -75,7 +75,6 @@ function mostrarSegundos() {
       container.appendChild(li);
       container.appendChild(inputCantidad);
       container.appendChild(agregarButton);
-
       segundosContainer.appendChild(container);
     }
   });

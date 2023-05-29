@@ -12,6 +12,23 @@ const stock_producto = document.querySelector("#stock_producto");
 const descripcion_producto = document.querySelector("#descripcion_producto");
 
 const cliente = new Cliente("contrasena1", "dayan");
+function actualizarItem(lista, producto) {
+  for (let i = 0; i < lista.length; i++) {
+    if (lista[i].nombre === producto.nombre) {
+      lista[i].stock = producto.stock;
+      lista[i].nombre = producto.nombre;
+      lista[i].precio = producto.precio;
+      break;
+    }
+  }
+}
+
+const array = JSON.parse(localStorage.getItem("reservas"));
+array.forEach((elemento) => {
+  // Aquí puedes realizar las operaciones deseadas con cada elemento del array
+  actualizarItem(PRODUCTOS, elemento);
+  console.log(elemento);
+});
 
 function mostrarSnacks() {
   productos_lista.innerHTML = "";
@@ -68,7 +85,7 @@ function mostrarSegundos() {
 }
 
 function mostrarProductos() {
-  PRODUCTOS.push(JSON.parse(localStorage.getItem("reservas")));
+  console.log(PRODUCTOS)
   mostrarSegundos();
   mostrarSnacks();
 }
@@ -120,6 +137,7 @@ crear_producto_form.addEventListener("submit", (event) => {
     const index = PRODUCTOS.indexOf(productoCreado);
     if (index > -1) {
       PRODUCTOS.splice(index, 1);
+      console.log(PRODUCTOS);
       li.remove();
       alert("Producto eliminado");
     }
@@ -141,7 +159,7 @@ form.addEventListener("submit", (event) => {
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Reservas: ${item.cantidad}`;
     div.appendChild(li);
 
-    const eliminarButton = createButton("Eliminar", () => {
+    const eliminarButton = createButton("Entregar", () => {
       cliente.eliminarReserva(item);
       div.removeChild(li);
       div.removeChild(eliminarButton);
