@@ -11,7 +11,6 @@ const precio_producto = document.querySelector("#precio_producto");
 const stock_producto = document.querySelector("#stock_producto");
 const descripcion_producto = document.querySelector("#descripcion_producto");
 
-const cliente = new Cliente("contrasena1", "dayan");
 function actualizarItem(lista, producto) {
   for (let i = 0; i < lista.length; i++) {
     if (lista[i].nombre === producto.nombre) {
@@ -22,25 +21,23 @@ function actualizarItem(lista, producto) {
     }
   }
 }
-
+console.log(PRODUCTOS);
 try {
   if (localStorage.getItem("reservas").length > 0) {
     const array = JSON.parse(localStorage.getItem("reservas"));
     array.forEach((elemento) => {
-      // Aquí puedes realizar las operaciones deseadas con cada elemento del array
       actualizarItem(PRODUCTOS, elemento);
       console.log(elemento);
     });
   }
 } catch (error) {
-  // Manejar el error
   console.error("Ocurrió un error:", error);
 }
 
 function mostrarSnacks() {
-  productos_lista.innerHTML = "";
+  const snacksContainer = document.createElement("div");
+  snacksContainer.innerHTML = "<b>SNACKS</b>";
   PRODUCTOS.forEach((producto) => {
-    console.log(producto.nombre + ": " + producto.categoria);
     if (producto.categoria == "snacks") {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
@@ -54,19 +51,28 @@ function mostrarSnacks() {
         if (index > -1) {
           PRODUCTOS.splice(index, 1);
           li.remove();
+          container.remove();
           alert("Producto eliminado");
         }
       });
 
-      li.appendChild(editarButton);
-      li.appendChild(eliminarButton);
-      productos_lista.appendChild(li);
+      const container = document.createElement("div");
+      container.setAttribute("class", "item_menu");
+      container.appendChild(li);
+      container.appendChild(editarButton);
+      container.appendChild(eliminarButton);
+
+      snacksContainer.appendChild(container);
     }
   });
+
+  productos_lista.innerHTML = "";
+  productos_lista.appendChild(snacksContainer);
 }
 
 function mostrarSegundos() {
-  productos_lista.innerHTML = "";
+  const segundosContainer = document.createElement("div");
+  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
   PRODUCTOS.forEach((producto) => {
     if (producto.categoria == "segundo") {
       const li = document.createElement("li");
@@ -81,21 +87,30 @@ function mostrarSegundos() {
         if (index > -1) {
           PRODUCTOS.splice(index, 1);
           li.remove();
+          container.remove();
           alert("Producto eliminado");
         }
       });
-      li.appendChild(editarButton);
-      li.appendChild(eliminarButton);
-      productos_lista.appendChild(li);
+
+      const container = document.createElement("div");
+      container.setAttribute("class", "item_menu");
+      container.appendChild(li);
+      container.appendChild(editarButton);
+      container.appendChild(eliminarButton);
+      segundosContainer.appendChild(container);
     }
   });
+
+  productos_lista.appendChild(segundosContainer);
 }
 
 function mostrarProductos() {
-  console.log(PRODUCTOS);
-  mostrarSegundos();
+  productos_lista.innerHTML = "";
   mostrarSnacks();
+  mostrarSegundos();
 }
+
+mostrarProductos();
 
 function editarProducto(producto) {
   nombre_producto.value = producto.nombre;
@@ -117,8 +132,6 @@ function createButton(text, clickHandler) {
   button.addEventListener("click", clickHandler);
   return button;
 }
-
-mostrarProductos();
 
 crear_producto_form.addEventListener("submit", (event) => {
   event.preventDefault();
