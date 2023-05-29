@@ -22,13 +22,14 @@ function actualizarItem(lista, producto) {
     }
   }
 }
-
-const array = JSON.parse(localStorage.getItem("reservas"));
-array.forEach((elemento) => {
-  // Aquí puedes realizar las operaciones deseadas con cada elemento del array
-  actualizarItem(PRODUCTOS, elemento);
-  console.log(elemento);
-});
+if (localStorage.getItem("reservas").length > 0) {
+  const array = JSON.parse(localStorage.getItem("reservas"));
+  array.forEach((elemento) => {
+    // Aquí puedes realizar las operaciones deseadas con cada elemento del array
+    actualizarItem(PRODUCTOS, elemento);
+    console.log(elemento);
+  });
+}
 
 function mostrarSnacks() {
   productos_lista.innerHTML = "";
@@ -85,7 +86,7 @@ function mostrarSegundos() {
 }
 
 function mostrarProductos() {
-  console.log(PRODUCTOS)
+  console.log(PRODUCTOS);
   mostrarSegundos();
   mostrarSnacks();
 }
