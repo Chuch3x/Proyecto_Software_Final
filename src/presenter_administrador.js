@@ -11,6 +11,9 @@ const precio_producto = document.querySelector("#precio_producto");
 const stock_producto = document.querySelector("#stock_producto");
 const descripcion_producto = document.querySelector("#descripcion_producto");
 
+var cliente = new Cliente("password","admin");
+cliente.reservas = JSON.parse(localStorage.getItem('reservas'));
+console.log(cliente.reservas);
 function actualizarItem(lista, producto) {
   for (let i = 0; i < lista.length; i++) {
     if (lista[i].nombre === producto.nombre) {
@@ -180,7 +183,8 @@ form.addEventListener("submit", (event) => {
     div.appendChild(li);
 
     const eliminarButton = createButton("Entregar", () => {
-      cliente.eliminarReserva(item);
+      cliente.eliminarReserva(item,item.cantidad);
+      localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
