@@ -28,7 +28,10 @@ function mostrarSnacks() {
       inputCantidad.min = "0";
       inputCantidad.value = "1";
 
-      const agregarButton = createButton("Reservar", () => {
+      const agregarButton = document.createElement("input");
+      agregarButton.type = "button";
+      agregarButton.value = "Reservar";
+      agregarButton.addEventListener("click", () => {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
           cliente.agregarReserva(producto, cantidad);
@@ -38,6 +41,7 @@ function mostrarSnacks() {
       });
 
       const container = document.createElement("div");
+      container.setAttribute("class", "item_menu");
       container.appendChild(li);
       container.appendChild(inputCantidad);
       container.appendChild(agregarButton);
@@ -72,6 +76,7 @@ function mostrarSegundos() {
       });
 
       const container = document.createElement("div");
+      container.setAttribute("class","item_menu");
       container.appendChild(li);
       container.appendChild(inputCantidad);
       container.appendChild(agregarButton);

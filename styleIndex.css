@@ -69,6 +69,38 @@ a {
 }
 
 #items_menu {
+  padding: 40px;;
   border-radius: 5px;
   background-color: #8bc5ff;
 }
+
+#items_menu div {
+    margin-bottom: 10px;
+  }
+  
+  .item_menu {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  input[type="button"] {
+    background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  }
+  
+  input[type="button"]:hover {
+    background-color: #dddddd;
+  }
+
+  input[type="number"] {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+
+
