@@ -110,12 +110,12 @@ function editarProducto(producto) {
   precio_producto.value = producto.precio;
   stock_producto.value = producto.stock;
   descripcion_producto.value = producto.descripcion;
+  categoria_producto.value = producto.categoria;
 
   const index = PRODUCTOS.indexOf(producto);
   if (index > -1) {
     PRODUCTOS.splice(index, 1);
   }
-
   mostrarProductos();
 }
 
@@ -139,15 +139,17 @@ crear_producto_form.addEventListener("submit", (event) => {
 
   PRODUCTOS.push(productoCreado);
   mostrarProductos();
+  crear_producto_form.reset();
   // const li = document.createElement("li");
   //li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
-  productos_lista.appendChild(li);
+  //productos_lista.appendChild(li);
 
   const editarInput = document.createElement("input");
   editarInput.type = "button";
   editarInput.value = "Editar";
   editarInput.addEventListener("click", () => {
     editarProducto(productoCreado);
+    crear_producto_form.reset();
   });
 
   const eliminarInput = document.createElement("input");
