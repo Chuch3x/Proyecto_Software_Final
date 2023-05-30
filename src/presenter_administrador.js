@@ -201,15 +201,18 @@ form.addEventListener("submit", (event) => {
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Reservas: ${item.cantidad}`;
     div.appendChild(li);
 
-    const eliminarButton = createButton("Entregar", () => {
-      cliente.eliminarReserva(item,item.cantidad);
+    const eliminarInput = document.createElement("input");
+    eliminarInput.type = "button";
+    eliminarInput.value = "Entregar";
+    eliminarInput.addEventListener("click", () => {
+      cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
-      disminuirStockPorNombre(item.nombre,item.cantidad);
+      disminuirStockPorNombre(item.nombre, item.cantidad);
       div.removeChild(li);
-      div.removeChild(eliminarButton);
+      div.removeChild(eliminarInput);
       mostrarProductos();
     });
 
-    div.appendChild(eliminarButton);
+    div.appendChild(eliminarInput);
   });
 });
