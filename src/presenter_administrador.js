@@ -156,11 +156,17 @@ crear_producto_form.addEventListener("submit", (event) => {
   li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
   productos_lista.appendChild(li);
 
-  const editarButton = createButton("Editar", () => {
+  const editarInput = document.createElement("input");
+  editarInput.type = "button";
+  editarInput.value = "Editar";
+  editarInput.addEventListener("click", () => {
     editarProducto(productoCreado);
   });
 
-  const eliminarButton = createButton("Eliminar", () => {
+  const eliminarInput = document.createElement("input");
+  eliminarInput.type = "button";
+  eliminarInput.value = "Eliminar";
+  eliminarInput.addEventListener("click", () => {
     const index = PRODUCTOS.indexOf(productoCreado);
     if (index > -1) {
       PRODUCTOS.splice(index, 1);
@@ -170,11 +176,13 @@ crear_producto_form.addEventListener("submit", (event) => {
     }
   });
 
-  li.appendChild(editarButton);
-  li.appendChild(eliminarButton);
+  li.appendChild(editarInput);
+  li.appendChild(eliminarInput);
   productos_lista.appendChild(li);
   crear_producto_form.reset();
 });
+
+
 function disminuirStockPorNombre(nombre,cantidad) {
   for (var i = 0; i < PRODUCTOS.length; i++) {
     if (PRODUCTOS[i].nombre === nombre) {
