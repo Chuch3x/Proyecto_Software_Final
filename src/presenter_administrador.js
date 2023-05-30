@@ -14,44 +14,33 @@ const categoria_producto = document.querySelector("#categoria_producto");
 var cliente = new Cliente("password", "admin");
 cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
+
 function mostrarProductosPor(categoria) {
-  const productoContainer = document.createElement("div");
-  productoContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
+  const productosContainer = document.createElement("div");
+  productosContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
+
   PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == categoria) {
+    if (producto.categoria === categoria) {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-      const editarInput = document.createElement("input");
-      editarInput.type = "button";
-      editarInput.value = "Editar";
-      editarInput.addEventListener("click", () => {
+      const editarButton = createButton("Editar", () => {
         editarProducto(producto);
       });
 
-      const eliminarInput = document.createElement("input");
-      eliminarInput.type = "button";
-      eliminarInput.value = "Eliminar";
-      eliminarInput.addEventListener("click", () => {
-        const index = PRODUCTOS.indexOf(producto);
-        if (index > -1) {
-          PRODUCTOS.splice(index, 1);
-          li.remove();
-          container.remove();
-          alert("Producto eliminado");
-        }
+      const eliminarButton = createButton("Eliminar", () => {
+        eliminarProducto(producto);
       });
 
       const container = document.createElement("div");
       container.setAttribute("class", "item_menu");
       container.appendChild(li);
-      container.appendChild(editarInput);
-      container.appendChild(eliminarInput);
-
-      productoContainer.appendChild(container);
+      container.appendChild(editarButton);
+      container.appendChild(eliminarButton);
+      productosContainer.appendChild(container);
     }
   });
-  productos_lista.appendChild(productoContainer);
+  productos_lista.appendChild(productosContainer);
 }
 
 function mostrarProductos() {
@@ -68,7 +57,6 @@ function editarProducto(producto) {
   stock_producto.value = producto.stock;
   descripcion_producto.value = producto.descripcion;
   categoria_producto.value = producto.categoria;
-
   const index = PRODUCTOS.indexOf(producto);
   if (index > -1) {
     PRODUCTOS.splice(index, 1);
@@ -85,7 +73,6 @@ function createButton(text, clickHandler) {
 
 crear_producto_form.addEventListener("submit", (event) => {
   event.preventDefault();
-
   const productoCreado = new Item(
     nombre_producto.value,
     parseFloat(precio_producto.value),
@@ -93,38 +80,8 @@ crear_producto_form.addEventListener("submit", (event) => {
     descripcion_producto.value,
     categoria_producto.value
   );
-
   PRODUCTOS.push(productoCreado);
   mostrarProductos();
-  crear_producto_form.reset();
-  // const li = document.createElement("li");
-  //li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
-  //productos_lista.appendChild(li);
-
-  const editarInput = document.createElement("input");
-  editarInput.type = "button";
-  editarInput.value = "Editar";
-  editarInput.addEventListener("click", () => {
-    editarProducto(productoCreado);
-    crear_producto_form.reset();
-  });
-
-  const eliminarInput = document.createElement("input");
-  eliminarInput.type = "button";
-  eliminarInput.value = "Eliminar";
-  eliminarInput.addEventListener("click", () => {
-    const index = PRODUCTOS.indexOf(productoCreado);
-    if (index > -1) {
-      PRODUCTOS.splice(index, 1);
-      console.log(PRODUCTOS);
-      li.remove();
-      alert("Producto eliminado");
-    }
-  });
-
-  li.appendChild(editarInput);
-  li.appendChild(eliminarInput);
-  //productos_lista.appendChild(li);
   crear_producto_form.reset();
 });
 
@@ -136,6 +93,15 @@ function disminuirStockPorNombre(nombre, cantidad) {
     }
   }
 }
+
+function eliminarProducto(producto) {
+  const index = PRODUCTOS.indexOf(producto);
+  if (index > -1) {
+    PRODUCTOS.splice(index, 1);
+    mostrarProductos();
+    alert("Producto eliminado");
+  }
+}
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -145,19 +111,14 @@ form.addEventListener("submit", (event) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Reservas: ${item.cantidad}`;
     div.appendChild(li);
-
-    const eliminarInput = document.createElement("input");
-    eliminarInput.type = "button";
-    eliminarInput.value = "Entregar";
-    eliminarInput.addEventListener("click", () => {
+    const eliminarButton = createButton("Entregar", () => {
       cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       disminuirStockPorNombre(item.nombre, item.cantidad);
       div.removeChild(li);
-      div.removeChild(eliminarInput);
+      div.removeChild(eliminarButton);
       mostrarProductos();
     });
-
-    div.appendChild(eliminarInput);
+    div.appendChild(eliminarButton);
   });
 });
