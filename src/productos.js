@@ -9,3 +9,4 @@ var PRODUCTOS=[
   ];
   
   export default PRODUCTOS;
+

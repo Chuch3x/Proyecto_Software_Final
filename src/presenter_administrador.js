@@ -10,22 +10,10 @@ const nombre_producto = document.querySelector("#nombre_producto");
 const precio_producto = document.querySelector("#precio_producto");
 const stock_producto = document.querySelector("#stock_producto");
 const descripcion_producto = document.querySelector("#descripcion_producto");
+const categoria_producto = document.querySelector("#categoria_producto");
 
-var cliente = new Cliente("password","admin");
-cliente.reservas = JSON.parse(localStorage.getItem('reservas'));
-console.log(cliente.reservas);
-function actualizarItem(lista, producto) {
-  for (let i = 0; i < lista.length; i++) {
-    if (lista[i].nombre === producto.nombre) {
-      lista[i].stock = producto.stock;
-      lista[i].nombre = producto.nombre;
-      lista[i].precio = producto.precio;
-      break;
-    }
-  }
-}
-console.log(PRODUCTOS);
-
+var cliente = new Cliente("password", "admin");
+cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
 function mostrarSnacks() {
   const snacksContainer = document.createElement("div");
@@ -69,7 +57,6 @@ function mostrarSnacks() {
   productos_lista.appendChild(snacksContainer);
 }
 
-
 function mostrarSegundos() {
   const segundosContainer = document.createElement("div");
   segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
@@ -110,7 +97,6 @@ function mostrarSegundos() {
   productos_lista.appendChild(segundosContainer);
 }
 
-
 function mostrarProductos() {
   productos_lista.innerHTML = "";
   mostrarSnacks();
@@ -147,13 +133,14 @@ crear_producto_form.addEventListener("submit", (event) => {
     nombre_producto.value,
     parseFloat(precio_producto.value),
     parseInt(stock_producto.value),
-    descripcion_producto.value
+    descripcion_producto.value,
+    categoria_producto.value
   );
 
   PRODUCTOS.push(productoCreado);
-
-  const li = document.createElement("li");
-  li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
+  mostrarProductos();
+  // const li = document.createElement("li");
+  //li.innerHTML = `${productoCreado.nombre}: ${productoCreado.descripcion} - Precio: $${productoCreado.precio} - Stock: ${productoCreado.stock}`;
   productos_lista.appendChild(li);
 
   const editarInput = document.createElement("input");
@@ -178,16 +165,15 @@ crear_producto_form.addEventListener("submit", (event) => {
 
   li.appendChild(editarInput);
   li.appendChild(eliminarInput);
-  productos_lista.appendChild(li);
+  //productos_lista.appendChild(li);
   crear_producto_form.reset();
 });
 
-
-function disminuirStockPorNombre(nombre,cantidad) {
+function disminuirStockPorNombre(nombre, cantidad) {
   for (var i = 0; i < PRODUCTOS.length; i++) {
     if (PRODUCTOS[i].nombre === nombre) {
       PRODUCTOS[i].stock -= cantidad;
-      break; 
+      break;
     }
   }
 }
