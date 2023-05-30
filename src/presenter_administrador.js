@@ -25,17 +25,7 @@ function actualizarItem(lista, producto) {
   }
 }
 console.log(PRODUCTOS);
-try {
-  if (localStorage.getItem("reservas").length > 0) {
-    const array = JSON.parse(localStorage.getItem("reservas"));
-    array.forEach((elemento) => {
-      actualizarItem(PRODUCTOS, elemento);
-      console.log(elemento);
-    });
-  }
-} catch (error) {
-  console.error("Ocurrió un error:", error);
-}
+
 
 function mostrarSnacks() {
   const snacksContainer = document.createElement("div");
@@ -171,7 +161,14 @@ crear_producto_form.addEventListener("submit", (event) => {
   productos_lista.appendChild(li);
   crear_producto_form.reset();
 });
-
+function disminuirStockPorNombre(nombre,cantidad) {
+  for (var i = 0; i < PRODUCTOS.length; i++) {
+    if (PRODUCTOS[i].nombre === nombre) {
+      PRODUCTOS[i].stock -= cantidad;
+      break; 
+    }
+  }
+}
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -185,6 +182,7 @@ form.addEventListener("submit", (event) => {
     const eliminarButton = createButton("Entregar", () => {
       cliente.eliminarReserva(item,item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
+      disminuirStockPorNombre(item.nombre,item.cantidad);
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();
