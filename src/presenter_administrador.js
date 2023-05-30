@@ -78,11 +78,17 @@ function mostrarSegundos() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-      const editarButton = createButton("Editar", () => {
+      const editarInput = document.createElement("input");
+      editarInput.type = "button";
+      editarInput.value = "Editar";
+      editarInput.addEventListener("click", () => {
         editarProducto(producto);
       });
 
-      const eliminarButton = createButton("Eliminar", () => {
+      const eliminarInput = document.createElement("input");
+      eliminarInput.type = "button";
+      eliminarInput.value = "Eliminar";
+      eliminarInput.addEventListener("click", () => {
         const index = PRODUCTOS.indexOf(producto);
         if (index > -1) {
           PRODUCTOS.splice(index, 1);
@@ -95,14 +101,15 @@ function mostrarSegundos() {
       const container = document.createElement("div");
       container.setAttribute("class", "item_menu");
       container.appendChild(li);
-      container.appendChild(editarButton);
-      container.appendChild(eliminarButton);
+      container.appendChild(editarInput);
+      container.appendChild(eliminarInput);
       segundosContainer.appendChild(container);
     }
   });
 
   productos_lista.appendChild(segundosContainer);
 }
+
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
