@@ -118,3 +118,10 @@ input[type="number"] {
 .mostrar_reservas {
   margin: 10px;
 }
+#crear_producto_form{
+  background-color: #8bc5ff;
+  border: 4px solid #facd5d;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 4px;
+}
