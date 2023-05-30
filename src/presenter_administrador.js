@@ -1,7 +1,6 @@
 import Cliente from "./cliente";
 import Item from "./item";
 import PRODUCTOS from "./productos";
-
 const form = document.querySelector("#menu_form");
 const div = document.querySelector("#lista_reservas");
 const productos_lista = document.querySelector("#items_menu");
@@ -15,11 +14,11 @@ const categoria_producto = document.querySelector("#categoria_producto");
 var cliente = new Cliente("password", "admin");
 cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
-function mostrarSnacks() {
-  const snacksContainer = document.createElement("div");
-  snacksContainer.innerHTML = "<b>SNACKS</b>";
+function mostrarProductosPor(categoria) {
+  const productoContainer = document.createElement("div");
+  productoContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
   PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == "snacks") {
+    if (producto.categoria == categoria) {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
@@ -49,58 +48,16 @@ function mostrarSnacks() {
       container.appendChild(editarInput);
       container.appendChild(eliminarInput);
 
-      snacksContainer.appendChild(container);
+      productoContainer.appendChild(container);
     }
   });
-
-  productos_lista.innerHTML = "";
-  productos_lista.appendChild(snacksContainer);
-}
-
-function mostrarSegundos() {
-  const segundosContainer = document.createElement("div");
-  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
-  PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == "segundo") {
-      const li = document.createElement("li");
-      li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-
-      const editarInput = document.createElement("input");
-      editarInput.type = "button";
-      editarInput.value = "Editar";
-      editarInput.addEventListener("click", () => {
-        editarProducto(producto);
-      });
-
-      const eliminarInput = document.createElement("input");
-      eliminarInput.type = "button";
-      eliminarInput.value = "Eliminar";
-      eliminarInput.addEventListener("click", () => {
-        const index = PRODUCTOS.indexOf(producto);
-        if (index > -1) {
-          PRODUCTOS.splice(index, 1);
-          li.remove();
-          container.remove();
-          alert("Producto eliminado");
-        }
-      });
-
-      const container = document.createElement("div");
-      container.setAttribute("class", "item_menu");
-      container.appendChild(li);
-      container.appendChild(editarInput);
-      container.appendChild(eliminarInput);
-      segundosContainer.appendChild(container);
-    }
-  });
-
-  productos_lista.appendChild(segundosContainer);
+  productos_lista.appendChild(productoContainer);
 }
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
-  mostrarSnacks();
-  mostrarSegundos();
+  mostrarProductosPor("snacks");
+  mostrarProductosPor("segundo");
 }
 
 mostrarProductos();
