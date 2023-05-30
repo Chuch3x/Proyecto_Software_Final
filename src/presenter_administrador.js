@@ -35,25 +35,29 @@ function mostrarSnacks() {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-      const editarButton = createButton("Editar", () => {
-        editarProducto(producto);
-      });
+      const inputCantidad = document.createElement("input");
+      inputCantidad.type = "number";
+      inputCantidad.min = "0";
+      inputCantidad.value = "1";
 
-      const eliminarButton = createButton("Eliminar", () => {
-        const index = PRODUCTOS.indexOf(producto);
-        if (index > -1) {
-          PRODUCTOS.splice(index, 1);
-          li.remove();
-          container.remove();
-          alert("Producto eliminado");
+      const agregarButton = document.createElement("input");
+      agregarButton.type = "button";
+      agregarButton.value = "Reservar";
+      agregarButton.addEventListener("click", () => {
+        const cantidad = parseInt(inputCantidad.value);
+        if (cantidad > 0) {
+          cliente.agregarReserva(producto, cantidad);
+          localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
+          console.log(PRODUCTOS);
+          mostrarProductos();
         }
       });
 
       const container = document.createElement("div");
       container.setAttribute("class", "item_menu");
       container.appendChild(li);
-      container.appendChild(editarButton);
-      container.appendChild(eliminarButton);
+      container.appendChild(inputCantidad);
+      container.appendChild(agregarButton);
 
       snacksContainer.appendChild(container);
     }
