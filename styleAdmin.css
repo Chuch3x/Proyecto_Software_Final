@@ -78,3 +78,43 @@ body {
       align-items: center;
       margin-bottom: 10px;
     }
+    input[type="button"] {
+        background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 7px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      }
+      
+      input[type="button"]:hover {
+        background-color: #dddddd;
+      }
+    
+      input[type="number"] {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    
+      #lista_reservas {
+        padding: 40px;
+        border-radius: 5px;
+        background-color: #8bc5ff;
+        border: 4px solid #facd5d;
+        margin-bottom: 10px;
+      }
+      
+      #lista_reservas div {
+        margin-bottom: 10px;
+      }
+      
+      .lista_reservas {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+    
+      .mostrar_reservas{
+        margin: 10px;
+      }
+      
