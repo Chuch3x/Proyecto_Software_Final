@@ -1,4 +1,12 @@
 describe('Menu vista Admin ', () => {
+    it("Muestra un item en el menu", () => {
+        cy.visit("administrador");
+        cy.get("#items_menu").should("contain", "Salchipapa");
+    });
+    it("Debería existir un menu", () => {
+        cy.visit("administrador");
+        cy.get("#items_menu").should("exist");
+    });
     it('Debería crear producto', () => {
         cy.visit('administrador.html')
         cy.get('#nombre_producto').type('Choripan')

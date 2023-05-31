@@ -1,11 +1,7 @@
 describe("Mostrar Menu", () => {
-    it("Muestra un item en el menu", () => {
-      cy.visit("/");
+    it("Se debería poder ver el menu", () => {
+      cy.visit("index.html");
       cy.get("#items_menu").should("contain", "Salchipapa");
-    });
-    it("Debería existir un menu", () => {
-      cy.visit("/");
-      cy.get("#items_menu").should("exist");
     });
   });
   
