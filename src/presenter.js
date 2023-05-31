@@ -15,11 +15,11 @@ function createButton(text, clickHandler) {
   return button;
 }
 
-function mostrarSnacks() {
+function mostrarProductoPor(categoria) {
   const snacksContainer = document.createElement("div");
-  snacksContainer.innerHTML = "<b>SNACKS</b>";
+  snacksContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
   PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == "snacks") {
+    if (producto.categoria == categoria) {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
@@ -50,52 +50,13 @@ function mostrarSnacks() {
       snacksContainer.appendChild(container);
     }
   });
-
-  productos_lista.innerHTML = "";
   productos_lista.appendChild(snacksContainer);
-}
-
-function mostrarSegundos() {
-  const segundosContainer = document.createElement("div");
-  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
-  PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == "segundo") {
-      const li = document.createElement("li");
-      li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-
-      const inputCantidad = document.createElement("input");
-      inputCantidad.type = "number";
-      inputCantidad.min = "0";
-      inputCantidad.value = "1";
-
-      const reservarButton = document.createElement("input");
-      reservarButton.type = "button";
-      reservarButton.value = "Reservar";
-      reservarButton.addEventListener("click", () => {
-        const cantidad = parseInt(inputCantidad.value);
-        if (cantidad > 0) {
-          cliente.agregarReserva(producto, cantidad);
-          localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
-          mostrarProductos();
-        }
-      });
-
-      const container = document.createElement("div");
-      container.setAttribute("class", "item_menu");
-      container.appendChild(li);
-      container.appendChild(inputCantidad);
-      container.appendChild(reservarButton);
-      segundosContainer.appendChild(container);
-    }
-  });
-
-  productos_lista.appendChild(segundosContainer);
 }
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
-  mostrarSnacks();
-  mostrarSegundos();
+  mostrarProductoPor("snacks");
+  mostrarProductoPor("segundo");
 }
 
 mostrarProductos();
