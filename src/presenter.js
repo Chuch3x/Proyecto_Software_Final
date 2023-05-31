@@ -15,52 +15,63 @@ function createButton(text, clickHandler) {
   return button;
 }
 
-function mostrarProductoPor(categoria) {
-  const snacksContainer = document.createElement("div");
-  snacksContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
-  PRODUCTOS.forEach((producto) => {
-    if (producto.categoria == categoria) {
-      const li = document.createElement("li");
-      li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
+function createContainer(className, elements) {
+  const container = document.createElement("div");
+  container.setAttribute("class", className);
+  elements.forEach((element) => container.appendChild(element));
+  return container;
+}
 
-      const inputCantidad = document.createElement("input");
-      inputCantidad.type = "number";
-      inputCantidad.min = "0";
-      inputCantidad.value = "1";
+function mostrarProducto(producto) {
+  const li = document.createElement("li");
+  li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-      const agregarButton = createButton("Reservar", () => {
-        const cantidad = parseInt(inputCantidad.value);
-        if (cantidad > 0) {
-          cliente.agregarReserva(producto, cantidad);
-          localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
-          console.log(PRODUCTOS);
-          mostrarProductos();
-        }
-      });
-      const container = document.createElement("div");
-      container.setAttribute("class", "item_menu");
-      container.appendChild(li);
-      container.appendChild(inputCantidad);
-      container.appendChild(agregarButton);
-      snacksContainer.appendChild(container);
+  const inputCantidad = document.createElement("input");
+  inputCantidad.type = "number";
+  inputCantidad.min = "0";
+  inputCantidad.value = "1";
+
+  const agregarButton = createButton("Reservar", () => {
+    const cantidad = parseInt(inputCantidad.value);
+    if (cantidad > 0) {
+      cliente.agregarReserva(producto, cantidad);
+      localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
+      console.log(PRODUCTOS);
+      mostrarProductos();
     }
   });
-  productos_lista.appendChild(snacksContainer);
+
+  return createContainer("item_menu", [li, inputCantidad, agregarButton]);
 }
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
-  mostrarProductoPor("snacks");
-  mostrarProductoPor("segundo");
+
+  const snacksContainer = document.createElement("div");
+  snacksContainer.innerHTML = "<b>SNACKS</b>";
+
+  const segundosContainer = document.createElement("div");
+  segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
+
+  PRODUCTOS.forEach((producto) => {
+    const container = mostrarProducto(producto);
+    if (producto.categoria === "snacks") {
+      snacksContainer.appendChild(container);
+    } else if (producto.categoria === "segundo") {
+      segundosContainer.appendChild(container);
+    }
+  });
+
+  productos_lista.appendChild(snacksContainer);
+  productos_lista.appendChild(segundosContainer);
 }
 
 mostrarProductos();
+
 function actualizarItem(lista, producto) {
-  for (let i = 0; i < lista.length; i++) {
-    if (lista[i].nombre === producto.nombre) {
-      lista[i].stock += producto.cantidad;
-      break;
-    }
+  const foundItem = lista.find((item) => item.nombre === producto.nombre);
+  if (foundItem) {
+    foundItem.stock += producto.cantidad;
   }
 }
 
@@ -69,9 +80,11 @@ form.addEventListener("submit", (event) => {
 
   const reservasCliente = cliente.reservas;
   div.innerHTML = "";
+
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
+
     const eliminarButton = createButton("Eliminar Reserva", () => {
       cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
