@@ -13,6 +13,9 @@ describe('Inicio de Sesión', () => {
         cy.get('button[type="submit"]').click()
         cy.get("#logout_admin").should('not.exist');
     });
-
-
+    it('Debería volver a la pagína de user', () => {
+        cy.visit('login.html')
+        cy.get("#volver_button").click()
+        cy.get("#login_admin").should('be.visible');
+    });
 });
