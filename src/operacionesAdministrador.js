@@ -1,5 +1,8 @@
 import PRODUCTOS from "./productos";
-function editarProducto(producto,productos_lista) {
+import Item from "./item";
+
+
+function editarProducto(producto, productos_lista) {
   nombre_producto.value = producto.nombre;
   precio_producto.value = producto.precio;
   stock_producto.value = producto.stock;
@@ -11,7 +14,7 @@ function editarProducto(producto,productos_lista) {
   }
   mostrarProductos(productos_lista);
 }
-function eliminarProducto(producto,productos_lista) {
+function eliminarProducto(producto, productos_lista) {
   const index = PRODUCTOS.indexOf(producto);
   if (index > -1) {
     PRODUCTOS.splice(index, 1);
@@ -26,6 +29,21 @@ function crearBoton(text, clickHandler) {
   return button;
 }
 
+function crearProducto(crear_producto_form,productos_lista) {
+  crear_producto_form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const productoCreado = new Item(
+      nombre_producto.value,
+      parseFloat(precio_producto.value),
+      parseInt(stock_producto.value),
+      descripcion_producto.value,
+      categoria_producto.value
+    );
+    PRODUCTOS.push(productoCreado);
+    mostrarProductos(productos_lista);
+    crear_producto_form.reset();
+  });
+}
 function mostrarProductosPor(categoria, productos_lista) {
   const productosContainer = document.createElement("div");
   productosContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
@@ -34,10 +52,10 @@ function mostrarProductosPor(categoria, productos_lista) {
       const li = document.createElement("li");
       li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
       const editarButton = crearBoton("Editar", () => {
-        editarProducto(producto,productos_lista);
+        editarProducto(producto, productos_lista);
       });
       const eliminarButton = crearBoton("Eliminar", () => {
-        eliminarProducto(producto,productos_lista);
+        eliminarProducto(producto, productos_lista);
       });
       const container = document.createElement("div");
       container.setAttribute("class", "item_menu");
@@ -57,4 +75,4 @@ function mostrarProductos(productos_lista) {
   mostrarProductosPor("segundo", productos_lista);
 }
 
-export { mostrarProductos };
+export { mostrarProductos, crearProducto};

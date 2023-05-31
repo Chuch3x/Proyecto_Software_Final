@@ -1,6 +1,5 @@
 import Cliente from "./cliente";
-import Item from "./item";
-import { mostrarProductos } from "./operacionesAdministrador";
+import { crearProducto, mostrarProductos } from "./operacionesAdministrador";
 import PRODUCTOS from "./productos";
 
 const form = document.querySelector("#menu_form");
@@ -17,7 +16,7 @@ var cliente = new Cliente("password", "admin");
 cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
 mostrarProductos(productos_lista);
-
+crearProducto(crear_producto_form,productos_lista);
 
 
 function crearBoton(text, clickHandler) {
@@ -27,19 +26,7 @@ function crearBoton(text, clickHandler) {
   return button;
 }
 
-crear_producto_form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const productoCreado = new Item(
-    nombre_producto.value,
-    parseFloat(precio_producto.value),
-    parseInt(stock_producto.value),
-    descripcion_producto.value,
-    categoria_producto.value
-  );
-  PRODUCTOS.push(productoCreado);
-  mostrarProductos();
-  crear_producto_form.reset();
-});
+
 
 function disminuirStockPorNombre(nombre, cantidad) {
   for (var i = 0; i < PRODUCTOS.length; i++) {
@@ -65,7 +52,7 @@ form.addEventListener("submit", (event) => {
       disminuirStockPorNombre(item.nombre, item.cantidad);
       div.removeChild(li);
       div.removeChild(entregarButton);
-      mostrarProductos();
+      mostrarProductos(productos_lista);
     });
     div.appendChild(entregarButton);
   });
