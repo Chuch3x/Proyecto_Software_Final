@@ -10,8 +10,8 @@ function crearBoton(text, clickHandler) {
 }
 
 function mostrarProductoPor(categoria, productos_lista) {
-  const snacksContainer = document.createElement("div");
-  snacksContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
+  const productoContainer = document.createElement("div");
+  productoContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
   PRODUCTOS.forEach((producto) => {
     if (producto.categoria == categoria) {
       const li = document.createElement("li");
@@ -36,10 +36,10 @@ function mostrarProductoPor(categoria, productos_lista) {
       container.appendChild(li);
       container.appendChild(inputCantidad);
       container.appendChild(agregarButton);
-      snacksContainer.appendChild(container);
+      productoContainer.appendChild(container);
     }
   });
-  productos_lista.appendChild(snacksContainer);
+  productos_lista.appendChild(productoContainer);
 }
 
 function mostrarProductos(productos_lista) {

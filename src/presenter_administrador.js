@@ -1,5 +1,6 @@
 import Cliente from "./cliente";
 import Item from "./item";
+import { mostrarProductos } from "./operacionesAdministrador";
 import PRODUCTOS from "./productos";
 
 const form = document.querySelector("#menu_form");
@@ -15,38 +16,7 @@ const categoria_producto = document.querySelector("#categoria_producto");
 var cliente = new Cliente("password", "admin");
 cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
-function mostrarProductosPor(categoria) {
-  const productosContainer = document.createElement("div");
-  productosContainer.innerHTML = `<b>${categoria.toUpperCase()}</b>`;
-  PRODUCTOS.forEach((producto) => {
-    if (producto.categoria === categoria) {
-      const li = document.createElement("li");
-      li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
-      const editarButton = crearBoton("Editar", () => {
-        editarProducto(producto);
-      });
-      const eliminarButton = crearBoton("Eliminar", () => {
-        eliminarProducto(producto);
-      });
-      const container = document.createElement("div");
-      container.setAttribute("class", "item_menu");
-      container.appendChild(li);
-      container.appendChild(editarButton);
-      container.appendChild(eliminarButton);
-      productosContainer.appendChild(container);
-    }
-  });
-
-  productos_lista.appendChild(productosContainer);
-}
-
-function mostrarProductos() {
-  productos_lista.innerHTML = "";
-  mostrarProductosPor("snacks");
-  mostrarProductosPor("segundo");
-}
-
-mostrarProductos();
+mostrarProductos(productos_lista);
 
 function editarProducto(producto) {
   nombre_producto.value = producto.nombre;
