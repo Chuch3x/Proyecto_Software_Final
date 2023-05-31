@@ -18,18 +18,7 @@ cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
 mostrarProductos(productos_lista);
 
-function editarProducto(producto) {
-  nombre_producto.value = producto.nombre;
-  precio_producto.value = producto.precio;
-  stock_producto.value = producto.stock;
-  descripcion_producto.value = producto.descripcion;
-  categoria_producto.value = producto.categoria;
-  const index = PRODUCTOS.indexOf(producto);
-  if (index > -1) {
-    PRODUCTOS.splice(index, 1);
-  }
-  mostrarProductos();
-}
+
 
 function crearBoton(text, clickHandler) {
   const button = document.createElement("button");
@@ -61,14 +50,6 @@ function disminuirStockPorNombre(nombre, cantidad) {
   }
 }
 
-function eliminarProducto(producto) {
-  const index = PRODUCTOS.indexOf(producto);
-  if (index > -1) {
-    PRODUCTOS.splice(index, 1);
-    mostrarProductos();
-    alert("Producto eliminado");
-  }
-}
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
