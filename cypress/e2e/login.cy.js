@@ -18,4 +18,12 @@ describe('Inicio de Sesión', () => {
         cy.get("#volver_button").click()
         cy.get("#login_admin").should('be.visible');
     });
+    it('Se debería poder hacer log out exitosamente', () => {
+        cy.visit('login.html')
+        cy.get('#usuario').type('admin')
+        cy.get('#contrasenia').type('password')    
+        cy.get('button[type="submit"]').click()
+        cy.get("#logout_admin").click()
+        cy.get("#login_admin").should('be.visible');
+    });
 });
