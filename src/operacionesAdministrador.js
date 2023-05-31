@@ -83,24 +83,24 @@ function disminuirStockPorNombre(nombre, cantidad) {
   }
 }
 
-function mostrarPedidos(form,div,productos_lista) {
-  form.addEventListener("submit", (event) => {
+function mostrarPedidos(form_pedidos,div_pedidos,productos_lista) {
+    form_pedidos.addEventListener("submit", (event) => {
     event.preventDefault();
-    div.innerHTML = "";
+    div_pedidos.innerHTML = "";
     const pedidos = JSON.parse(localStorage.getItem("reservas"));
     pedidos.forEach((item) => {
       const li = document.createElement("li");
       li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Reservas: ${item.cantidad}`;
-      div.appendChild(li);
+      div_pedidos.appendChild(li);
       const entregarButton = crearBoton("Entregar", () => {
         cliente.eliminarReserva(item, item.cantidad);
         localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
         disminuirStockPorNombre(item.nombre, item.cantidad);
-        div.removeChild(li);
-        div.removeChild(entregarButton);
+        div_pedidos.removeChild(li);
+        div_pedidos.removeChild(entregarButton);
         mostrarProductos(productos_lista);
       });
-      div.appendChild(entregarButton);
+      div_pedidos.appendChild(entregarButton);
     });
   });
 }

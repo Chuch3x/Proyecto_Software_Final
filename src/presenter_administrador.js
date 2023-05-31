@@ -2,8 +2,8 @@ import Cliente from "./cliente";
 import { crearProducto, mostrarPedidos, mostrarProductos } from "./operacionesAdministrador";
 import PRODUCTOS from "./productos";
 
-const form = document.querySelector("#menu_form");
-const div = document.querySelector("#lista_reservas");
+const form_pedidos = document.querySelector("#menu_form");
+const div_pedidos = document.querySelector("#lista_reservas");
 const productos_lista = document.querySelector("#items_menu");
 const crear_producto_form = document.querySelector("#crear_producto_form");
 const nombre_producto = document.querySelector("#nombre_producto");
@@ -17,7 +17,7 @@ cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 
 mostrarProductos(productos_lista);
 crearProducto(crear_producto_form,productos_lista);
-mostrarPedidos(form,div,productos_lista);
+mostrarPedidos(form_pedidos,div_pedidos,productos_lista);
 
 
 
