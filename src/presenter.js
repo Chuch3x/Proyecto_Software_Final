@@ -8,30 +8,30 @@ const productos_lista = document.querySelector("#items_menu");
 
 const cliente = new Cliente("contrasena1", "dayan");
 
-function createButton(text, clickHandler) {
-  const button = document.createElement("button");
+function crearBoton(text, clickHandler) {
+  const button = document.crearElemento("button");
   button.textContent = text;
   button.addEventListener("click", clickHandler);
   return button;
 }
 
-function createContainer(className, elements) {
-  const container = document.createElement("div");
+function crearContenedor(className, elements) {
+  const container = document.crearElemento("div");
   container.setAttribute("class", className);
   elements.forEach((element) => container.appendChild(element));
   return container;
 }
 
 function mostrarProducto(producto) {
-  const li = document.createElement("li");
+  const li = document.crearElemento("li");
   li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-  const inputCantidad = document.createElement("input");
+  const inputCantidad = document.crearElemento("input");
   inputCantidad.type = "number";
   inputCantidad.min = "0";
   inputCantidad.value = "1";
 
-  const agregarButton = createButton("Reservar", () => {
+  const agregarButton = crearBoton("Reservar", () => {
     const cantidad = parseInt(inputCantidad.value);
     if (cantidad > 0) {
       cliente.agregarReserva(producto, cantidad);
@@ -41,16 +41,16 @@ function mostrarProducto(producto) {
     }
   });
 
-  return createContainer("item_menu", [li, inputCantidad, agregarButton]);
+  return crearContenedor("item_menu", [li, inputCantidad, agregarButton]);
 }
 
 function mostrarProductos() {
   productos_lista.innerHTML = "";
 
-  const snacksContainer = document.createElement("div");
+  const snacksContainer = document.crearElemento("div");
   snacksContainer.innerHTML = "<b>SNACKS</b>";
 
-  const segundosContainer = document.createElement("div");
+  const segundosContainer = document.crearElemento("div");
   segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
 
   PRODUCTOS.forEach((producto) => {
@@ -82,10 +82,10 @@ form.addEventListener("submit", (event) => {
   div.innerHTML = "";
 
   reservasCliente.forEach((item) => {
-    const li = document.createElement("li");
+    const li = document.crearElemento("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
 
-    const eliminarButton = createButton("Eliminar Reserva", () => {
+    const eliminarButton = crearBoton("Eliminar Reserva", () => {
       cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       actualizarItem(PRODUCTOS, item);
