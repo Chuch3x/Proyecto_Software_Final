@@ -28,10 +28,7 @@ function mostrarProductoPor(categoria) {
       inputCantidad.min = "0";
       inputCantidad.value = "1";
 
-      const agregarButton = document.createElement("input");
-      agregarButton.type = "button";
-      agregarButton.value = "Reservar";
-      agregarButton.addEventListener("click", () => {
+      const agregarButton = createButton("Reservar", () => {
         const cantidad = parseInt(inputCantidad.value);
         if (cantidad > 0) {
           cliente.agregarReserva(producto, cantidad);
@@ -40,13 +37,11 @@ function mostrarProductoPor(categoria) {
           mostrarProductos();
         }
       });
-
       const container = document.createElement("div");
       container.setAttribute("class", "item_menu");
       container.appendChild(li);
       container.appendChild(inputCantidad);
       container.appendChild(agregarButton);
-
       snacksContainer.appendChild(container);
     }
   });
@@ -77,14 +72,10 @@ form.addEventListener("submit", (event) => {
   reservasCliente.forEach((item) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
-    const eliminarButton = document.createElement("input");
-    eliminarButton.type = "button";
-    eliminarButton.value = "Eliminar";
-    eliminarButton.addEventListener("click", () => {
+    const eliminarButton = createButton("Eliminar Reserva", () => {
       cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       actualizarItem(PRODUCTOS, item);
-      
       div.removeChild(li);
       div.removeChild(eliminarButton);
       mostrarProductos();

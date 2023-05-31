@@ -39,7 +39,14 @@ input[type="submit"] {
   cursor: pointer;
   border-radius: 4px;
 }
-
+button{
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
 a {
   color: #333;
   text-decoration: none;
@@ -121,6 +128,5 @@ a {
   }
 
   .mostrar_reservas{
-    margin: 10px;
-  }
-  
+    margin: 10px;
+}
