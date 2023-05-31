@@ -12,8 +12,7 @@ const stock_producto = document.querySelector("#stock_producto");
 const descripcion_producto = document.querySelector("#descripcion_producto");
 const categoria_producto = document.querySelector("#categoria_producto");
 
-var cliente = new Cliente("password", "admin");
-cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
+
 
 mostrarProductos(productos_lista);
 crearProducto(crear_producto_form,productos_lista);

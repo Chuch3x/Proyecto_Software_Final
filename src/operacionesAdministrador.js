@@ -1,6 +1,9 @@
 import PRODUCTOS from "./productos";
 import Item from "./item";
+import Cliente from "./cliente";
 
+var cliente = new Cliente("password", "admin");
+cliente.reservas = JSON.parse(localStorage.getItem("reservas"));
 function editarProducto(producto, productos_lista) {
   nombre_producto.value = producto.nombre;
   precio_producto.value = producto.precio;
@@ -83,8 +86,8 @@ function disminuirStockPorNombre(nombre, cantidad) {
   }
 }
 
-function mostrarPedidos(form_pedidos,div_pedidos,productos_lista) {
-    form_pedidos.addEventListener("submit", (event) => {
+function mostrarPedidos(form_pedidos, div_pedidos, productos_lista) {
+  form_pedidos.addEventListener("submit", (event) => {
     event.preventDefault();
     div_pedidos.innerHTML = "";
     const pedidos = JSON.parse(localStorage.getItem("reservas"));
@@ -105,4 +108,4 @@ function mostrarPedidos(form_pedidos,div_pedidos,productos_lista) {
   });
 }
 
-export { mostrarProductos, crearProducto,mostrarPedidos };
+export { mostrarProductos, crearProducto, mostrarPedidos };
