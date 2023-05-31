@@ -9,24 +9,24 @@ const productos_lista = document.querySelector("#items_menu");
 const cliente = new Cliente("contrasena1", "dayan");
 
 function crearBoton(text, clickHandler) {
-  const button = document.crearElemento("button");
+  const button = document.createElement("button");
   button.textContent = text;
   button.addEventListener("click", clickHandler);
   return button;
 }
 
 function crearContenedor(className, elements) {
-  const container = document.crearElemento("div");
+  const container = document.createElement("div");
   container.setAttribute("class", className);
   elements.forEach((element) => container.appendChild(element));
   return container;
 }
 
 function mostrarProducto(producto) {
-  const li = document.crearElemento("li");
+  const li = document.createElement("li");
   li.innerHTML = `${producto.nombre}: ${producto.descripcion} - Precio: $${producto.precio} - Stock: ${producto.stock}`;
 
-  const inputCantidad = document.crearElemento("input");
+  const inputCantidad = document.createElement("input");
   inputCantidad.type = "number";
   inputCantidad.min = "0";
   inputCantidad.value = "1";
@@ -47,10 +47,10 @@ function mostrarProducto(producto) {
 function mostrarProductos() {
   productos_lista.innerHTML = "";
 
-  const snacksContainer = document.crearElemento("div");
+  const snacksContainer = document.createElement("div");
   snacksContainer.innerHTML = "<b>SNACKS</b>";
 
-  const segundosContainer = document.crearElemento("div");
+  const segundosContainer = document.createElement("div");
   segundosContainer.innerHTML = "<b>SEGUNDOS</b>";
 
   PRODUCTOS.forEach((producto) => {
@@ -82,7 +82,7 @@ form.addEventListener("submit", (event) => {
   div.innerHTML = "";
 
   reservasCliente.forEach((item) => {
-    const li = document.crearElemento("li");
+    const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
 
     const eliminarButton = crearBoton("Eliminar Reserva", () => {
