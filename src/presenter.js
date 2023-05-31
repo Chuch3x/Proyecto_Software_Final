@@ -1,13 +1,16 @@
 import Cliente from "./cliente";
 import Item from "./item";
-import { mostrarProductos } from "./operacionesPresenter";
+import { ingresar, mostrarProductos } from "./operacionesPresenter";
 import PRODUCTOS from "./productos";
 
 const form = document.querySelector("#menu_form");
 const div = document.querySelector("#lista_reservas");
 const productos_lista = document.querySelector("#items_menu");
 
-mostrarProductos(productos_lista);
+const cliente = new Cliente("contrasena1", "dayan");
+
+ingresar(cliente);
+mostrarProductos(productos_lista)
 
 function actualizarItem(lista, producto) {
   const foundItem = lista.find((item) => item.nombre === producto.nombre);
@@ -26,7 +29,7 @@ form.addEventListener("submit", (event) => {
     const li = document.createElement("li");
     li.innerHTML = `${item.nombre} - Precio: $${item.precio} - Cantidad: ${item.cantidad}`;
 
-    const eliminarButton = crearBoton("Eliminar Reserva", () => {
+    const eliminarButton = createButton("Eliminar Reserva", () => {
       cliente.eliminarReserva(item, item.cantidad);
       localStorage.setItem("reservas", JSON.stringify(cliente.reservas));
       actualizarItem(PRODUCTOS, item);
