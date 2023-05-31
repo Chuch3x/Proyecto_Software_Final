@@ -27,7 +27,7 @@ describe('Menu vista Admin ', () => {
         cy.get('input[value="Crear producto"]').click()
         cy.get("#items_menu").should("contain", "Hamburguesa: Carne en un pan - Precio: $10 - Stock: 10");
         cy.xpath('id("items_menu")//li[contains(text(),"Hamburguesa")]/following-sibling::button/following-sibling::button').click()
-        cy.get("#items_menu").not().should("contain", "");
+        cy.get("#items_menu").should("not.have.text", "Hamburguesa: Carne en un pan - Precio: $10 - Stock: 10");
 
     });
 });
