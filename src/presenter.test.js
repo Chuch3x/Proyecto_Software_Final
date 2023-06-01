@@ -48,4 +48,8 @@ describe("Mostrar items", () => {
     item.categoria="sopa";
     expect(item).toEqual({"categoria": "sopa","descripcion": "Carne y chorizo con papas.", "nombre": "Pique Macho", "precio": 15, "stock":21});
   });
+  it("No debería reservar si la cantidad es mayor al stock", () => {
+    cliente.agregarReserva(item,22);
+    expect(item.stock).toEqual(21);
+  });
 });

@@ -6,7 +6,7 @@ class Cliente {
     this.reservas = [];
   }
   agregarReserva(item, cantidad) {
-    if (item.stock > 0 && cantidad > 0) {
+    if (item.stock > 0 && cantidad > 0 && cantidad<=item.stock) {
       item.stock -= cantidad;
       const itemReserva = {
         ...item,
